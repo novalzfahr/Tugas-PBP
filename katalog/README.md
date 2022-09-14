@@ -1,7 +1,7 @@
 **Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara `urls.py`, `views.py`, `models.py`, dan berkas `html`;**
 
 #bagan tabel
-![alt text](./assets/tabel.JPG "tabel-image")
+![alt text](./assets/tabel.jpg "tabel-image")
 
 **Jelaskan kenapa menggunakan virtual environment? Apakah kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan virtual environment?**
 > Menggunakan *virtual environment* agar mengisolasi *package* serta *dependencies* dari aplikasi sehingga tidak bertabrakan dengan versi lain yang ada di komputer. Kita tetap bisa menggunakan django tanpa *virtual environment*, tetapi disarankan memakai *virtual environment* supaya kita bisa menjalankan aplikasi web dengan versi django berbeda-beda pada satu komputer
