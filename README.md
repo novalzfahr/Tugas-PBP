@@ -5,6 +5,7 @@
 > Menggunakan *virtual environment* agar mengisolasi *package* serta *dependencies* dari aplikasi sehingga tidak bertabrakan dengan versi lain yang ada di komputer. Kita tetap bisa menggunakan django tanpa *virtual environment*, tetapi disarankan memakai *virtual environment* supaya kita bisa menjalankan aplikasi web dengan versi django berbeda-beda pada satu komputer
 
 **Jelaskan bagaimana cara kamu mengimplementasikan poin 1 sampai dengan 4 di atas**
+
 1. 
 Buka `views.py` yang ada pada folder `katalog` lalu buat fungsi yang menerima parameter `request` dan mengembalikan `render(request, "katalog.html")`.
 ```
