@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+ {% block content %}
+
+  <h1>Lab 3 Assignment PBP/PBD</h1>
+
+  <h5>Name: </h5>
+  <p>{{nama}}</p>
+
+  <h5>Student ID: </h5>
+  <p>{{student_ID}}</p>
+
+  <table>
+    <tr>
+      <th>watched</th>
+      <th>title</th>
+      <th>rating</th>
+      <th>release_date</th>
+      <th>review</th>
+    </tr>
+{% comment %} Tambahkan data di bawah baris ini {% endcomment %}
+{% for barang in list_barang %}
+    <tr>
+        <th>{{barang.watched}}</th>
+        <th>{{barang.title}}</th>
+        <th>{{barang.rating}}</th>
+        <th>{{barang.release_date}}</th>
+        <th>{{barang.review}}</th>
+    </tr>
+{% endfor %}
+  </table>
+
+ {% endblock content %}
+
+
