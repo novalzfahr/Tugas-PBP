@@ -18,7 +18,7 @@ XML:
     1. XML Documents harus memiliki sebuah Root Element
     2. XML prolog itu optional. Jika ada, harus diawal dokumen 
     3. Semua elemen XML harus mempunyai *Closing Tag*
-    4. XML tags itu *case sensitive*. Tag <Letter> berbeda dengan tag <letter>. Tag pembuka dan penutup harus ditulis dengan *case* yang sama(konsisten).
+    4. XML tags itu *case sensitive*. Tag `Letter` berbeda dengan tag `letter`. Tag pembuka dan penutup harus ditulis dengan *case* yang sama(konsisten).
 
 HTML:
 - Menggunakan ekstensi .html
@@ -33,32 +33,32 @@ HTML:
 Data delivery proses mentransfer data yang telah dibuat ke platform yang dituji. Hal ini perlu dilakukan agar data tersimpan dalam database sehingga memudahkan kita jika ingin melakukan pencarian.
 
 **3. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas**
-1. Menambahkan aplikasi baru bernama <mywatchlist> debgan command
-'''
+1. Menambahkan aplikasi baru bernama `mywatchlist` dengan command
+```
 python manage.py startapp mywatchlist
-'''
+```
 
-2. Menambahkan path <mywatchlist> di folder <urls.py> dan mendaftarkannya pada bagian INSTALLED_APPS di <settings.py>  dengan command
-'''
+2. Menambahkan path `mywatchlist` di folder `urls.py` dan mendaftarkannya pada bagian INSTALLED_APPS di `settings.py`  dengan command
+```
 path('mywatchlist/', include('mywatchlist.urls')),
-'''
+```
 
-'''
+```
 'mywatchlist',
-'''
+```
 
-3. Model dibuat pada file <models.py> yang ada di folder <mywatchlist> lalu kita membuat <class> yang berfungsi untuk menampung objek dan attribute untuk mendefinisikan <key>
-'''
+3. Model dibuat pada file `models.py` yang ada di folder `mywatchlist` lalu kita membuat `class` yang berfungsi untuk menampung objek dan attribute untuk mendefinisikan `key`
+```
 class MywatchlistItem(models.Model):
     watched = models.CharField(max_length=255)
     title = models.TextField()
     rating = models.FloatField()
     release_date = models.TextField()
     review = models.TextField()
-''' 
+``` 
 
-4. Membuat folder <fixtures> di dalam <mywatchlist>. Di dalam fixtures akan diisi file <initial_mywatchlist_data.json> untuk menampung data-data yang akan ditambahkan pada html page.
-'''
+4. Membuat folder `fixtures` di dalam `mywatchlist`. Di dalam fixtures akan diisi file `initial_mywatchlist_data.json` untuk menampung data-data yang akan ditambahkan pada html page.
+```
 [
     {
         "model": "mywatchlist.MywatchlistItem",
@@ -171,17 +171,17 @@ class MywatchlistItem(models.Model):
         }
     }
 ]
-'''
+```
 
-5. Buka file <views.py> pada <mywatchlist> lalu tambahkan
+5. Buka file `views.py` pada `mywatchlist` lalu tambahkan
 
-'''
+```
 from django.http import HttpResponse
 from django.core import serializers
-'''
+```
 
 Setelah itu buat fungsi yang menerima parameter request untuk mengembalikan data dalam bentuk HTML, XML, dan JSON
-'''
+```
 def show_html(request):
     data = MywatchlistItem.objects.all()
     context = {
@@ -190,36 +190,36 @@ def show_html(request):
     'student_ID': '2106750931'
     }
     return render(request, "mywatchlist.html", context)
-'''
+```
 
-'''
+```
 def show_xml(request):
     data = MywatchlistItem.objects.all()
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
-'''
+```
 
-'''
+```
 def show_json(request):
     data = MywatchlistItem.objects.all()
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
-'''
+```
 
-Tambahkan ke <urls.py> terus import fungsi yang sudah dibuat. Tambahkan ke path <urlpatterns>
-'''
+Tambahkan ke `urls.py` terus import fungsi yang sudah dibuat. Tambahkan ke path `urlpatterns`
+```
 from mywatchlist.views import show_xml 
 from mywatchlist.views import show_json
 from mywatchlist.views import show_html 
-'''
+```
 
 
-'''
+```
 path('xml/', show_xml, name='show_xml'),
 path('json/', show_json, name='show_json'),
 path('html/', show_html, name='show_html'),
-'''
+```
 
-6.  Pertama buat folder <templates> untuk menyimpan file <mywatchlist.html>
-'''
+6.  Pertama buat folder `templates` untuk menyimpan file `mywatchlist.html`
+```
 {% extends 'base.html' %}
 
  {% block content %}
@@ -253,10 +253,10 @@ path('html/', show_html, name='show_html'),
   </table>
 
  {% endblock content %}
-'''
+```
 
-Pada folder <urls.py> tambahkan
-'''
+Pada folder `urls.py` tambahkan
+```
 from django.urls import path
 from mywatchlist.views import show_mywatchlist
 
@@ -265,27 +265,27 @@ app_name = 'mywatchlist'
 urlpatterns = [
     path('', show_mywatchlist, name='show_mywatchlist'),
 ]
-'''
+```
 
-lalu memanggil <python manage.py runserver> untuk melakukan routing dan menjalankan aplikasi.
+lalu memanggil `python manage.py runserver` untuk melakukan routing dan menjalankan aplikasi.
 
 7. Buka `Settings -> Secrets -> Actions -> new repository secrets`. Lalu buka heroku dan copy `API` dan `nama projek aplikasi`, lalu tambahkan ke dalam repository secret. Setelah selesai jangan lupa untuk simpan perubahan.
 
 8.  Mengakses melalui postman
- <HTML>
+ `HTML`
  
  ![alt text](./assets/html.png "html-image")
 
- <JSON>
+ `JSON`
 
  ![alt text](./assets/json.png "json-image")
 
- <XML>
+ `XML`
 
  ![alt text](./assets/xml.png "xml-image")
 
-9. Melakukan test URL dapat mengembalikan respon <HTTP 200 OK>
-'''
+9. Melakukan test URL dapat mengembalikan respon `HTTP 200 OK`
+```
 class MywatchlistTest(TestCase):
     def test_mywatchlist_show_html(self):
         response = Client().get('/mywatchlist/html/')
@@ -298,4 +298,4 @@ class MywatchlistTest(TestCase):
     def test_mywatchlist_show_xml(self):
         response = Client().get('/mywatchlist/xml/')
         self.assertEqual(response.status_code, 200)
-'''
+```
