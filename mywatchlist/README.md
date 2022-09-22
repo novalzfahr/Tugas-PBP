@@ -30,7 +30,7 @@ HTML:
 - Atribut HTML biasanya secara name/value, seperti: name = "value"
 
 **2. Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?**
-Data delivery proses mentransfer data yang telah dibuat ke platform yang dituji. Hal ini perlu dilakukan agar data tersimpan dalam database sehingga memudahkan kita jika ingin melakukan pencarian.
+Data delivery proses mentransfer data yang telah dibuat ke platform yang dituju. Data delivery dapat menjadi perantara untuk memudahkan transfer data ke platform. Data yang dikirim dalam format HTML, JSON, atau XML.
 
 **3. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas**
 1. Menambahkan aplikasi baru bernama `mywatchlist` dengan command
@@ -64,7 +64,7 @@ class MywatchlistItem(models.Model):
         "model": "mywatchlist.MywatchlistItem",
         "pk": 1,
         "fields": {
-            "watched": "No",
+            "watched": "Tidak",
             "title": "One Piece Film: Gold",
             "rating": 3.6,
             "release_date": "8 September 2016",
@@ -75,7 +75,7 @@ class MywatchlistItem(models.Model):
         "model": "mywatchlist.MywatchlistItem",
         "pk": 2,
         "fields": {
-            "watched": "Yes",
+            "watched": "Iya",
             "title": "Annihilation",
             "rating": 3.4,
             "release_date": "23 Februari 2018",
@@ -86,7 +86,7 @@ class MywatchlistItem(models.Model):
         "model": "mywatchlist.MywatchlistItem",
         "pk": 3,
         "fields": {
-            "watched": "No",
+            "watched": "Tidak",
             "title": "The Gray Man",
             "rating": 3.3,
             "release_date": "22 Juli 2022",
@@ -97,7 +97,7 @@ class MywatchlistItem(models.Model):
         "model": "mywatchlist.MywatchlistItem",
         "pk": 4,
         "fields": {
-            "watched": "Yes",
+            "watched": "Iya",
             "title": "Spider-Man: No Way Home",
             "rating": 4.1,
             "release_date": "15 Desember 2021",
@@ -108,7 +108,7 @@ class MywatchlistItem(models.Model):
         "model": "mywatchlist.MywatchlistItem",
         "pk": 5,
         "fields": {
-            "watched": "Yes",
+            "watched": "Iya",
             "title": "Divergent",
             "rating": 3.3,
             "release_date": "20 Maret 2014",
@@ -119,7 +119,7 @@ class MywatchlistItem(models.Model):
         "model": "mywatchlist.MywatchlistItem",
         "pk": 6,
         "fields": {
-            "watched": "Yes",
+            "watched": "Iya",
             "title": "X-Men: Apocalypse",
             "rating": 3.45,
             "release_date": "18 Mei 2016",
@@ -130,7 +130,7 @@ class MywatchlistItem(models.Model):
         "model": "mywatchlist.MywatchlistItem",
         "pk": 7,
         "fields": {
-            "watched": "Yes",
+            "watched": "Iya",
             "title": "Knives Out",
             "rating": 3.9,
             "release_date": "27 November 2019",
@@ -141,7 +141,7 @@ class MywatchlistItem(models.Model):
         "model": "mywatchlist.MywatchlistItem",
         "pk": 8,
         "fields": {
-            "watched": "No",
+            "watched": "Tidak",
             "title": "Scream",
             "rating": 3.15,
             "release_date": "12 Januari 2022",
@@ -152,7 +152,7 @@ class MywatchlistItem(models.Model):
         "model": "mywatchlist.MywatchlistItem",
         "pk": 9,
         "fields": {
-            "watched": "No",
+            "watched": "Tidak",
             "title": "The Kings Man",
             "rating": 3.15,
             "release_date": "22 Desember 2021",
@@ -163,7 +163,7 @@ class MywatchlistItem(models.Model):
         "model": "mywatchlist.MywatchlistItem",
         "pk": 10,
         "fields": {
-            "watched": "Yes",
+            "watched": "Iya",
             "title": "Ready Player One",
             "rating": 3.7,
             "release_date": "28 Maret 2018",
