@@ -14,6 +14,7 @@ def show_mywatchlist(request):
         elif (i == "Tidak"):
             not_watched += 1
         
+        
     if watched > not_watched:
         pesan = "Selamat, kamu sudah banyak menonton!"
     else:
