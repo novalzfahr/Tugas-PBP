@@ -120,6 +120,6 @@ urlpatterns = [
 
 8. Buka `Settings -> Secrets -> Actions -> new repository secrets`. Lalu buka heroku dan copy `API` dan `nama projek aplikasi`, lalu tambahkan ke dalam repository secret. Setelah selesai jangan lupa untuk simpan perubahan.
 
-9. 
+9. Setelah deploy heroku, kita jalankan app nya dan membuat 2 akun baru yang berisi 3 data. Untuk melihat data bisa di `admin`.
 
 
