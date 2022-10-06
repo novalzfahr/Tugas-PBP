@@ -9,9 +9,9 @@ def show_mywatchlist(request):
     watched = 0
     not_watched = 0
     for i in data_my_watch_list:
-        if (i == "Iya"):
+        if (i.watched == "Iya"):
             watched += 1
-        elif (i == "Tidak"):
+        elif (i.watched == "Tidak"):
             not_watched += 1
         
         

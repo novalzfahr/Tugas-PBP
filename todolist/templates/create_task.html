@@ -6,35 +6,31 @@
 
 {% block content %}
 
+<div class="d-flex justify-content-center mt-1">
+    <h1>CREATE TASK</h1>
+</div>
 
-<form method="POST" action="">
+<div style="height: 100%;" class="d-flex justify-content-center align-items-center">
+    <form method="POST" action="" style="width: 100vh;">
+        {% csrf_token %}
+        <div>
+            <p>Date: </p>
+            <input type="date" name="date" placeholder="DATE" class="form-control">
+    
+            <p>Title: </p>
+            <input type="text" name="title" placeholder="TITTLE" class="form-control">
+    
+            <p>Description: </p>
+            <input type="text" name="description" placeholder="DESCRIPTION" class="form-control">
+        </div>
 
-    {% csrf_token %}
+        <div class="d-flex justify-content-center mt-2 pt-4 gap-3">
+            <a class="btn btn-primary btn-lg" href="{% url 'todolist:show_todolist' %}" 
+            style="padding-left: 2.5rem; padding-right: 2.5rem;">Back </a>
 
-    <table>
-        <tr>
-            <td>Date: </td>
-            <td><input type="date" name="date" placeholder="DATE" class="form-control"></td>
-        </tr>
-
-        <tr>
-            <td>Tittle: </td>
-            <td><input type="text" name="title" placeholder="TITTLE" class="form-control"></td>
-        </tr>
-
-        <tr>
-            <td>Description: </td>
-            <td><input type="text" name="description" placeholder="DESCRIPTION" class="form-control"></td>
-        </tr>
-
-        <tr>
-            <td></td>
-            <td><input class="btn login_btn" type="submit" value="Submit" href="{% url 'todolist:show_todolist' %}"></td>
-        </tr>
-    </table>
-
-</form>
-
-
-
+            <button <a class="btn btn-primary btn-lg" href="{% url 'todolist:create_task' %}" type="submit" value="submit"
+            style="padding-left: 2.5rem; padding-right: 2.5rem;"> </a>Submit</button>
+        </div>
+    </form>
+</div>
 {% endblock content %}

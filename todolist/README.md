@@ -1,3 +1,10 @@
+### Link apk
+```
+
+```
+
+# Tugas 4 PBP
+
 **1. Apa kegunaan {% csrf_token %} pada elemen <form>? Apa yang terjadi apabila tidak ada potongan kode tersebut pada elemen <form>?**
 CSRF merupakan singkatan dari Cross Site Request Forgery berguna untuk mencegah serangan CSRF yang membuat penyerang tidak mungkin melakukan *request* HTTP yang keseluruhannya valid yang cocok untuk diumpamakan ke korban. Jika tidak ada `csrf_token` maka website akan rentan terhadap *cyber attack*.
 
@@ -122,4 +129,102 @@ urlpatterns = [
 
 9. Setelah deploy heroku, kita jalankan app nya dan membuat 2 akun baru yang berisi 3 data. Untuk melihat data bisa di `admin`.
 
+# Tugas 5 PBP
 
+**1. Apa perbedaan dari Inline, Internal, dan External CSS? Apa saja kelebihan dan kekurangan dari masing-masing style?**
+->Inline CSS adalah kode CSS yang ditulis langsung pada atribut elemen HTML.    Setiap elemen HTML memiliki atribut `style`.
+Kelebihan:
+- proses load website cepat
+- lebih mudah dalam *fix code* jika terjadi kesalahan
+Kekurangan:
+- kurang cocok jika ingin membuat style yang akan dipakai lagi.
+
+-> Internal CSS adalah kode yang ditulis menggunakan `<style>` sehingga dapat mendefinisikan *styling* dari selector.
+Kelebihan:
+- class dan ID bisa dipakai oleh internal stylesheet
+- Perubahan CSS hanya satu *page* saja
+Kekurangan:
+- Jika style yang dibuat banyak maka akan memenuhi template.
+
+-> Eksternal CSS adalah kode CSS yang ditulis terpisah dari file HTML menggunakan `.css`
+Kelebihan:
+- file `.css` dapat digunakan beberapa template
+Kekurangan:
+- Memengaruhi waktu render website karena mengambil file dari luar.
+
+**2. Jelaskan tag HTML5 yang kamu ketahui.**
+`h1` -- `h6` akan menamilkan teks dengan `h1` ukuran terbesar dan bertambahnya  angka membuat ukuran teks makin kecil
+`p` menampilkan teks berukuran normal
+`a` Teks yang diapit akan muncul sebagai link
+`button` membuat button
+`div` membungkus dan memisahkan elemen lain
+`form` mendefinisikan form input
+`nav` mendefinisikan navbar
+`video` menambahkan video di HTML
+`input` digunakan dalam tag `form` untuk mengambil input dari *user*.
+
+**3. Jelaskan tipe-tipe CSS selector yang kamu ketahui.**
+1. Elemen selector
+   Element selector menggunakan tag HTML sebagai selector untuk mengubah properti yang terdapat dalam tag tersebut.
+```
+h1 {
+  color: #fca205;
+  font-family: "Monospace";
+  font-style: italic;
+}
+```
+
+2. ID selector
+   ID selector menggunakan ID pada tag sebagai selector-nya. TD yang ingin ditambahkan harus bersifat unik
+```
+...
+<body>
+  <div id="header">
+    <h1>Tutorial CSS Yay</h1>
+  </div>
+  ...
+</body>
+```
+kemudian pada file CSS
+```
+#header {
+  background-color: #f0f0f0;
+  margin-top: 0;
+  padding: 20px 20px 20px 40px;
+}
+```
+
+3. Class selector
+   menggunakan class pada file HTML 
+```
+<div class="card-header card-bg-rv">Date: {{data.date}}</div>
+```
+   lalu pada file CSS
+```
+.card-bg-rv {
+    color: rebeccapurple;
+    background-color: black;
+}
+```
+
+**4. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas.**
+1. Mendefinisikan bootstrap pada `base.html`
+```
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+```
+2. Kustomisasi file .html yang ada menggunakan bootstrap yang sudah saya tambahkan
+
+3. Bonus menambahkan efek hover pada cards. Pada file `todolist.html` saya menambahkan efek zoom lalu saya menuliskannya pada file `style.css`
+```
+<div class="card text-center zoom">
+    ...
+</div>
+```
+file CSS
+```
+.zoom:hover {
+    transform: scale(1.3);
+}
+```

@@ -1,0 +1,29 @@
+.zoom:hover {
+    transform: scale(1.3);
+}
+
+.responsive-navbar {
+    height: 70px;
+}
+
+.responsive-container {
+    height: 500px;
+}
+
+@media (max-width: 750px) {
+    .responsive-container {
+        height: auto;
+        flex-direction: column;
+        flex-wrap: wrap;
+        padding: 10px;
+    }
+
+    .card-bg-rv {
+        color: rebeccapurple;
+        background-color: black;
+    }
+
+    .responsive-navbar {
+        height: auto;
+    }
+}

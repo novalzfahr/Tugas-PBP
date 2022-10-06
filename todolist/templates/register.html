@@ -3,32 +3,57 @@
 {% block meta %}
 <title>Registrasi Akun</title>
 {% endblock meta %}
+{% block content %}
+{% load static %}
 
-{% block content %}  
+<div style="background-image: url('{% static "media/a5.png" %}'); height: 100vh;">
+    <div class = "container-fluid px-2 py-5 ">
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                <div class="card" style="border-radius: 30px">
+                    <div class="card-body p-5">
+                        <h2 class="text-uppercase text-center mb-5">Registration form</h2>
+                        <div class="row d-flex justify-content-center align-items-center h-100">
+                            <p id="description">Please fill it!</p>
+                            <form method="POST" >  
+                                {% csrf_token %}  
+                                <div class="row mb-4">
+                                    <label for="{{form.username.id_for_label}}" class="col-sm-4 col-form-label">Username: </label>
+                                    <div class="col-sm-2">
+                                        {{form.username}}
+                                    </div>
+                                </div>
 
-<div class = "login">
-    
-    <h1>Formulir Registrasi</h1>  
+                                <div class="row mb-4">
+                                    <label for="{{form.password1.id_for_label}}" class="col-sm-4 col-form-label">Password: </label>
+                                    <div class="col-sm-2">
+                                        {{form.password1}}
+                                    </div>
+                                </div>
+                                
+                                <div class="row mb-1">
+                                    <label for="{{form.password1.id_for_label}}" class="col-sm-4 col-form-label">Confirmation password: </label>
+                                    <div class="col-sm-2">
+                                        {{form.password2}}
+                                    </div>
+                                </div>
 
-        <form method="POST" >  
-            {% csrf_token %}  
-            <table>  
-                {{ form.as_table }}  
-                <tr>  
-                    <td></td>
-                    <td><input type="submit" name="submit" value="Daftar"/></td>  
-                </tr>  
-            </table>  
-        </form>
+                                <div class="d-flex justify-content-center ">
+                                    <button type="submit" value="Login" class="btn btn-primary btn-lg"
+                                    style="padding-left: 2.5rem; padding-right: 2.5rem;">Register</button>
+                                </div>
+                            </form>
+                            <div class="d-flex justify-content-center fw-bold mt-2 pt-1 mb-0">Already have an account? <a href="{% url 'todolist:login' %}"
+                                class="link-danger">Login here </a></div>
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-    {% if messages %}  
-        <ul>   
-            {% for message in messages %}  
-                <li>{{ message }}</li>  
-                {% endfor %}  
-        </ul>   
-    {% endif %}
 
-</div>  
 
 {% endblock content %}

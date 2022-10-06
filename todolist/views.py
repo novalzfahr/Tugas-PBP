@@ -1,3 +1,4 @@
+import operator
 import datetime
 from todolist.models import Task
 from django.shortcuts import render
@@ -16,13 +17,13 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='/todolist/login/')
 def show_todolist(request):
     task= Task.objects.filter(user= request.user)
+    task = sorted(task, key= operator.attrgetter('date'))
     context = {
     'list_todo': task,
     'username': request.COOKIES['username'],
     'last_login': request.COOKIES['last_login'],
     }
     return render(request, "todolist.html", context)
-
 
 def register(request):
     form = UserCreationForm()
@@ -64,6 +65,11 @@ def create_task(request):
         data.save()
         return redirect("todolist:show_todolist")
     return render(request, "create_task.html", context)
+
+def delete_task(request, id):
+    task = Task.objects.get(id=id)
+    task.delete()
+    return redirect('todolist:show_todolist')
 
 def logout_user(request):
     logout(request)

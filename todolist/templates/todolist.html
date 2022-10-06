@@ -1,29 +1,44 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% load static %}
 <title>To Do List</title>
 
-<h5>Username: {{username}}</h5>
+<nav class="navbar navbar-expand-lg bg-info navbar-light responsive-navbar">
+  <div class="container-fluid">
+    <a class="navbar-brand">Username: {{username}}</a>
+      <ul class="navbar-nav d-flex flex-row me-1">
+        <li class="nav-item me-3 me-lg-0">
+            <a class="nav-link text-white" href="{% url 'todolist:logout' %}"><i class="fas fa-cog mx-1"></i> Log out</a>
+        </li>
+    </ul>
+  </div>
+</nav>
 
+<div class="d-flex justify-content-center align-items-center mt-4">
+  <a href="{% url 'todolist:create_task' %}" class="btn btn-primary">Create task</a>
+</div>
 
-<table>
-{% comment %} Tambahkan data di bawah baris ini {% endcomment %}
-    <tr>
-    <th>date</th>
-    <th>title</th>
-    <th>description</th>
-    </tr>
-    {% for data in list_todo %}
-    <tr>
-        <th>{{data.date}}</th>
-        <th>{{data.title}}</th>
-        <th>{{data.description}}</th>
-    </tr>
-{% endfor %}
-    {% comment %} Tambahkan data di bawah baris ini {% endcomment %}
-</table>
-<h5>Sesi terakhir login: {{ last_login }}</h5>
-<button><a href="{% url 'todolist:logout' %}">Logout</a></button>
-<button><a href="{% url 'todolist:create_task' %}">create_task</a></button>
+<div class="d-flex flex-row justify-content-center align-items-center gap-3 responsive-container">
+  {% for data in list_todo %}
+  <div class="card text-center zoom">
+    <div class="card-header card-bg-rv">Date: {{data.date}}</div>
+    <div class="image-box card-bg-rv">
+      <img src="{% static "media/a3.png" %}" height="200"">
+      <div class="card responsive-card">
+        <div class="card-body card-bg-rv">
+          <h5 class="card-title">{{data.title}}</h5>
+          <p class="card-text"> {{data.description}} </p>
+          <a href="{% url 'todolist:delete-task' data.id %}" class="btn btn-primary">Delete task</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="d-flex justify-content-center">
+  <h5>Sesi terakhir login: {{ last_login }}</h5>
+</div>
 
 {% endblock content %}
