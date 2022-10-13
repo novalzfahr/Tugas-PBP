@@ -1,19 +1,17 @@
 import operator
 import datetime
+from turtle import title
 from todolist.models import Task
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, redirect
 from django.core import serializers
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.urls import reverse
-from django.shortcuts import redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
-from django.contrib.auth import logout
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 
-# Create your views here.
 @login_required(login_url='/todolist/login/')
 def show_todolist(request):
     task= Task.objects.filter(user= request.user)
@@ -25,9 +23,29 @@ def show_todolist(request):
     }
     return render(request, "todolist.html", context)
 
+@login_required(login_url='/todolist/login/')
+def show_json(request):
+    data = Task.objects.filter(user = request.user)
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+@csrf_exempt
+@login_required(login_url="/todolist/login/")
+def add_todolist(request):
+    if request.method == "POST":
+        title = request.POST.get("title")
+        date = request.POST.get("date")
+        deskripsi = request.POST.get("deskripsi")
+        Task.objects.create(
+            title=title, date=date, description=deskripsi, user=request.user
+        )
+        return JsonResponse({
+            "title": title,
+            "date": date,
+            "deskripsi": deskripsi
+        }, status=200)
+
 def register(request):
     form = UserCreationForm()
-
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():

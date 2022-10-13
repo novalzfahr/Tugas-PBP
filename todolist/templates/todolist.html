@@ -2,16 +2,83 @@
 
 {% block content %}
 {% load static %}
+<script>
+  $(document).ready(function(){
+      $.getJSON("{% url 'todolist:show_json' %}", function(data){
+          $.each(data, function(index,value){
+            console.log(value)
+              $("#todolist").append(
+                `<div class="card text-center zoom">
+                  <div class="card-header card-bg-rv">Date: ${value.fields.date}</div>
+                    <div class="image-box card-bg-rv">
+                      <img src= "/static/media/a3.png" height="200"">
+                      <div class="card responsive-card">
+                        <div class="card-body card-bg-rv">
+                          <h5 class="card-title"> ${value.fields.title}</h5>
+                          <p class="card-text"> ${value.fields.description} </p>
+                          <a href="#" class="btn btn-primary">Delete task</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>  
+                </div>`    
+              )
+          })
+      })
+    $("#form-ajax").on("submit",function(e) {
+      e.preventDefault() 
+      let date = $("#date").val();
+      let title = $("#title").val();
+      let deskripsi = $("#deskripsi").val();
+      $.ajax({
+        method: "POST",
+        url: "/todolist/add/",
+        data: {"date":date, "title":title, "deskripsi":deskripsi},
+      }).done(function(resp) {
+        console.log(resp)
+        $("#todolist").append(
+          `<div class="card text-center zoom">
+            <div class="card-header card-bg-rv">Date: ${resp.date}</div>
+              <div class="image-box card-bg-rv">
+                <img src= "/static/media/a3.png" height="200"">
+                <div class="card responsive-card">
+                  <div class="card-body card-bg-rv">
+                    <h5 class="card-title"> ${resp.title}</h5>
+                    <p class="card-text"> ${resp.deskripsi} </p>
+                    <a id="btn-delete" class="btn btn-primary">Delete task</a>
+                  </div>
+                </div>
+              </div>
+            </div>  
+          </div>`    
+        )
+        $("#modal-todolist").modal("toggle")
+      });
+    })
+  })
+</script>
+
 <title>To Do List</title>
 
 <nav class="navbar navbar-expand-lg bg-info navbar-light responsive-navbar">
   <div class="container-fluid">
-    <a class="navbar-brand">Username: {{username}}</a>
-      <ul class="navbar-nav d-flex flex-row me-1">
-        <li class="nav-item me-3 me-lg-0">
+    <a class="navbar-brand">To Do List</a>
+      <ul class="navbar-nav d-flex flex-wrap me-1">
+        <li lass="nav-item me-3 me-lg-1">
+          <a class="nav-link text-white">
+            <img src="{% static "media/a2.png" %}"
+                 class="rounded-circle"
+                 height="22"
+                 alt="jisoo"
+                 loading="lazy" />
+            {{username}}
+          </a>
+        </li>
+        <li class="nav-item me-3 me-lg-1">
             <a class="nav-link text-white" href="{% url 'todolist:logout' %}"><i class="fas fa-cog mx-1"></i> Log out</a>
         </li>
     </ul>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-todolist" data-bs-whatever= "@mdo" id="create-task">Create task</button>
   </div>
 </nav>
 
@@ -19,26 +86,39 @@
   <h5>Sesi terakhir login: {{ last_login }}</h5>
 </div>
 
-<div class="d-flex justify-content-center align-items-center mt-4">
-  <a href="{% url 'todolist:create_task' %}" class="btn btn-primary">Create task</a>
+<div class="d-flex flex-wrap justify-content-center align-items-center gap-3 responsive-container mt-4" id="todolist">
 </div>
 
-<div class="d-flex flex-wrap justify-content-center align-items-center gap-3 responsive-container mt-4">
-  {% for data in list_todo %}
-  <div class="card text-center zoom">
-    <div class="card-header card-bg-rv">Date: {{data.date}}</div>
-    <div class="image-box card-bg-rv">
-      <img src="{% static "media/a3.png" %}" height="200"">
-      <div class="card responsive-card">
-        <div class="card-body card-bg-rv">
-          <h5 class="card-title">{{data.title}}</h5>
-          <p class="card-text"> {{data.description}} </p>
-          <a href="{% url 'todolist:delete-task' data.id %}" class="btn btn-primary">Delete task</a>
-        </div>
+<div class="modal fade" id="modal-todolist" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">Create task</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="form-ajax" action = "/todolist/add/">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label class="col-form-label">Date:</label>
+            <input type="date" class="form-control" id="date" required>
+          </div>
+          <div class="mb-3">
+            <label class="col-form-label">Title:</label>
+            <input type="text" class="form-control" id="title" required>
+          </div>
+          <div class="mb-3">
+            <label class="col-form-label">Description:</label>
+            <textarea class="form-control" id="deskripsi" required></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" value="submit" class="btn btn-primary" id="btn_submit">Submit</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
-  {% endfor %}
 </div>
 
 {% endblock content %}

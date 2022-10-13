@@ -11,4 +11,4 @@ class Task(models.Model):
     title = models.TextField()
     description = models.TextField()
 
-    
+
