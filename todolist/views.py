@@ -1,6 +1,5 @@
 import operator
 import datetime
-from turtle import title
 from todolist.models import Task
 from django.shortcuts import render, redirect
 from django.core import serializers
