@@ -2,6 +2,7 @@
 
 {% block content %}
 {% load static %}
+
 <script>
   $(document).ready(function(){
       $.getJSON("{% url 'todolist:show_json' %}", function(data){
